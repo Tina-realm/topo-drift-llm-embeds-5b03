@@ -1,0 +1,53 @@
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Data Construction}
+\label{sec:data}
+
+We use the \agnews dataset~\cite{zhang2015character}, which contains 120K training samples across four topic classes: World (Class 0), Sports (Class 1), Business (Class 2), and Sci/Tech (Class 3), each with 30K samples. We encode 2{,}000 samples per class using the \texttt{all-MiniLM-L6-v2} sentence-transformer~\cite{reimers2019sentence}, producing 384-dimensional L2-normalized embeddings.
+
+We construct streaming windows of 200 samples each. The first 10 windows serve as a reference pool (no drift) for threshold calibration. We design five drift scenarios to test different aspects of detector sensitivity:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{No drift} (control): All windows from the same class (World).
+    \item \textbf{Abrupt topic drift}: Reference windows from World; test windows switch entirely to Sports.
+    \item \textbf{Gradual topic drift}: Reference from World; test windows contain a linearly increasing proportion of Sports samples.
+    \item \textbf{Geometric drift}: Reference windows from a World+Business mix; test windows from a Sports+Sci/Tech mix, changing multi-class topology while maintaining a mixed distribution.
+    \item \textbf{Style shift}: Reference from World; test windows from Business---a subtler same-genre shift compared to the World$\to$Sports topic switch.
+\end{itemize}
+
+\subsection{Drift Detectors}
+\label{sec:detectors}
+
+We evaluate nine drift detectors spanning two families: four statistical baselines and five TDA methods.
+
+\para{Statistical baselines.}
+\textbf{Centroid shift} computes the L2 norm of the difference between reference and test window mean embeddings: $d_{\text{cent}} = \|\bar{\vx}_{\text{ref}} - \bar{\vx}_{\text{test}}\|_2$. \textbf{Covariance shift} applies PCA to 50 dimensions and computes the Frobenius norm of the covariance matrix difference: $d_{\text{cov}} = \|\mSigma_{\text{ref}} - \mSigma_{\text{test}}\|_F$. \textbf{MMD (RBF)} computes the Maximum Mean Discrepancy with a Gaussian kernel using the median heuristic for bandwidth selection. \textbf{kNN distance} measures the change in mean $k$-nearest-neighbor distance ($k=5$) between reference and test windows.
+
+\para{TDA methods.}
+All TDA methods subsample 80 points from each 200-sample window for computational tractability and compute persistent homology using the \vrfilt filtration via \texttt{ripser}~\cite{tralie2019ripser}.
+
+\textbf{Persistent entropy H0 (PE-H0)} computes the Shannon entropy of H0 (connected component) persistence lifetimes:
+\begin{equation}
+    \text{PE}(\text{dgm}) = -\sum_{i} \frac{\ell_i}{L} \log \frac{\ell_i}{L}, \quad \ell_i = d_i - b_i, \quad L = \sum_i \ell_i,
+    \label{eq:pe}
+\end{equation}
+where $b_i$ and $d_i$ are the birth and death times of the $i$-th feature, and $\ell_i$ is its lifetime. The drift score is $|{\text{PE}(\text{ref}) - \text{PE}(\text{test})}|$.
+
+\textbf{Persistent entropy H1 (PE-H1)} applies the same entropy computation to H1 features (loops/holes), capturing changes in the presence and distribution of topological cycles.
+
+\textbf{Wasserstein H0} computes the Wasserstein-1 distance between H0 persistence diagrams of the reference and test windows using \texttt{persim}~\cite{tralie2019ripser}.
+
+\textbf{PHD (Persistent Homology Dimension)} estimates the log-log slope of the number of connected components versus filtration scale, following~\citet{wei2025shortphd}. The drift score is the absolute difference in PHD between windows.
+
+\textbf{Betti AUC} computes the absolute difference in the sum of H0 lifetimes (area under the Betti-0 curve) between reference and test windows.
+
+\subsection{Evaluation Protocol}
+\label{sec:eval}
+
+We calibrate detection thresholds using the 95th percentile of drift scores computed on the 10 no-drift reference windows, targeting a false positive rate (FPR) of approximately 5\%. We then evaluate on 10 drift windows per scenario and report four metrics: (1) AUC-ROC for discriminating drift from no-drift windows, (2) detection delay (number of windows before first alarm), (3) realized FPR on no-drift data, and (4) runtime per window. All experiments are repeated with three random seeds (42, 123, 456) and metrics are averaged.
+
+\subsection{Supplementary Synthetic Experiment}
+\label{sec:synthetic}
+
+To isolate TDA's theoretical advantage on topology-specific drift, we design a synthetic experiment in 10 dimensions with three centroid-preserving drift scenarios: (1) \textbf{Centroid drift}: a Gaussian blob shifted by 3 units (positive control); (2) \textbf{Loop drift}: reference is a Gaussian blob, test is an annulus with the same centroid but an H1 loop; (3) \textbf{Split drift}: reference is a single blob, test is two symmetric clusters (same centroid, different H0 structure). We measure separability as the ratio of drift score to no-drift score.

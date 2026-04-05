@@ -1,0 +1,49 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Statistical Methods Dominate on AG News}
+
+The central finding of our study---that classical statistical detectors achieve perfect AUC on all \agnews drift scenarios---reflects the high semantic separability of the four topic classes in the \minilm embedding space. World news, Sports, Business, and Sci/Tech form well-separated clusters, so even a simple centroid comparison clearly signals distribution change. The drift scenarios we test, while representative of common deployment concerns (topic shift, gradual drift, domain shift), are not subtle enough to challenge low-order statistics.
+
+This result is practically important: for production systems where the primary concern is topic-level input drift, centroid shift is fast (0.1ms per window), reliable (AUC\,=\,1.0), and sufficient. There is no need for more complex methods to detect these coarse-grained shifts.
+
+\subsection{When TDA Adds Genuine Value}
+
+The synthetic experiment (\secref{sec:synthetic_results}) identifies the precise conditions under which TDA provides unique detection capability.
+
+\para{H1 features detect loop/hole emergence.}
+PE-H1 achieves $12.3\times$ separability on annular drift---a scenario where the input distribution develops a topological hole while preserving its centroid. Centroid shift fails entirely on this scenario ($0.8\times$), and even covariance shift provides only $2.2\times$ separability. This result validates the theoretical motivation for TDA-based monitoring: persistent homology captures qualitative structural changes invisible to moment-based statistics.
+
+In practice, such topology changes could arise when LLM inputs converge to a semantic neighborhood while systematically avoiding certain sub-topics---creating a ``hole'' in embedding space. Adversarial prompt injection that avoids triggering topic-based filters while shifting the geometric distribution is another plausible scenario.
+
+\para{MMD as a partial alternative.}
+MMD also detects loop drift ($8.3\times$), since the RBF kernel captures distributional differences beyond moments. However, MMD provides a single scalar score without topological interpretability---it signals that distributions differ but not \emph{how} they differ structurally. TDA features (H0 vs.\ H1 entropy, Betti curves at specific filtration radii) offer richer diagnostic information about the nature of the drift.
+
+\subsection{Practical Monitoring Recommendations}
+
+Based on our results, we recommend a two-tier monitoring strategy:
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Primary tier:} Centroid shift and MMD for fast, reliable detection of topic-level and distributional drift. Centroid shift runs in 0.1ms and catches all natural topic shifts; MMD at 126ms provides distributional sensitivity beyond moments.
+    \item \textbf{Secondary tier:} TDA H1 features (PE-H1 or Wasserstein H1) as complementary detectors tuned for geometric reorganization. These add $\sim$37ms overhead and catch topology-specific drifts that moment-based methods miss.
+\end{enumerate}
+
+The TDA tier is most valuable when the monitoring goal extends beyond topic shift to include structural changes in user query patterns, adversarial distribution manipulation, or convergence to specific semantic neighborhoods.
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+\para{Dataset scope.}
+We test only \agnews with four well-separated topics. More challenging drift scenarios---within-domain temporal drift (e.g., news from 2020 vs.\ 2024 on the same topic), subtle vocabulary shifts, or adversarial rephrasing---may produce different relative rankings between TDA and statistical methods.
+
+\para{Synthetic--real gap.}
+TDA's topology advantage was demonstrated in 10-dimensional synthetic data. In the 384-dimensional normalized embedding space of \minilm, \vrfilt filtration topology is less interpretable, and the curse of dimensionality affects persistent homology computation.
+
+\para{Subsample variance.}
+TDA requires subsampling to 80 points for tractability, introducing substantial variance (std up to 0.215 in AUC). Larger point clouds would improve TDA sensitivity but at higher computational cost. GPU-accelerated or approximate persistent homology methods could enable larger subsamples.
+
+\para{Single embedding model.}
+We test only \texttt{all-MiniLM-L6-v2}. Models that produce less separable or more topologically complex representations could favor TDA methods. Larger LLM embeddings (768+ dimensions) may exhibit richer topological structure.
+
+\para{Fixed reference pool.}
+Our setup compares each window against a fixed reference. In true streaming scenarios, the reference itself may drift, requiring adaptive windowing strategies.

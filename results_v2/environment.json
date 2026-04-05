@@ -1,0 +1,22 @@
+{
+  "python": "3.12.8 (main, Dec 19 2024, 14:33:20) [Clang 18.1.8 ]",
+  "numpy": "2.4.4",
+  "sklearn": "1.8.0",
+  "ripser": "0.6.14",
+  "persim": "0.3.8",
+  "timestamp": "2026-04-05T15:46:42.055670",
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1011
+  ],
+  "window_sizes": [
+    100,
+    200,
+    400
+  ],
+  "tda_subsample": 150,
+  "gpu": "none (CPU only)"
+}

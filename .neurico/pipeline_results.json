@@ -3,22 +3,12 @@
   "stages": {
     "resource_finder": {
       "success": true,
-      "completion_marker": "/workspaces/topo-drift-llm-embeds-5b03/.resource_finder_complete",
-      "outputs": {
-        "literature_review": "/workspaces/topo-drift-llm-embeds-5b03/literature_review.md",
-        "resources_catalog": "/workspaces/topo-drift-llm-embeds-5b03/resources.md",
-        "papers_dir": "/workspaces/topo-drift-llm-embeds-5b03/papers",
-        "datasets_dir": "/workspaces/topo-drift-llm-embeds-5b03/datasets",
-        "code_dir": "/workspaces/topo-drift-llm-embeds-5b03/code"
-      },
-      "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude.log",
-      "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude_transcript.jsonl",
-      "elapsed_time": 560.9754900932312
+      "skipped": true
     },
     "experiment_runner": {
       "success": true,
       "return_code": 0,
-      "elapsed_time": 5174.464672088623,
+      "elapsed_time": 6653.228857755661,
       "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude.log",
       "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude_transcript.jsonl"
     }

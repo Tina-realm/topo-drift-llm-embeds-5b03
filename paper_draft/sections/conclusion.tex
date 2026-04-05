@@ -1,0 +1,8 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented the first systematic comparison of TDA-based and classical drift detectors on LLM embedding streams. On natural topic drift in \agnews, classical statistical methods (centroid shift, covariance shift, MMD) achieve perfect detection with AUC\,=\,1.0 and zero delay, while the best TDA method (Wasserstein H0) reaches AUC\,=\,0.93 on abrupt drift. However, our synthetic experiment demonstrates that TDA fills a genuine detection gap: H1 persistent entropy achieves $12.3\times$ separability on centroid-preserving loop drift where centroid shift fails entirely. These results show that TDA-based monitoring is not a replacement for statistical methods on standard drift benchmarks, but a complementary tool for detecting geometric reorganization invisible to moment-based statistics.
+
+For practitioners deploying LLM monitoring pipelines, we recommend starting with centroid shift and MMD for fast, reliable topic-drift detection, and adding TDA H1 features as a secondary layer for topology-sensitive monitoring at modest computational cost ($\sim$37ms per window on CPU).
+
+Future work should evaluate on within-domain temporal drift where low-order statistics may be similar, test adversarial prompt injection scenarios where topology might change uniquely, explore larger point cloud sizes with GPU-accelerated persistent homology to reduce TDA variance, and investigate ensemble detectors that combine TDA and statistical scores. Testing with embedding models that produce more topologically complex representations (\eg large LLM activations) is another promising direction.

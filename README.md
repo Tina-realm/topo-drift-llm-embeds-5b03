@@ -1,58 +1,65 @@
 # Topological Drift Detection for Continuous Monitoring of LLM Embedding Streams
 
-A comparative study of TDA-based vs statistical drift detectors on LLM text embedding streams.
-Machine Learning research | NeuriCo | 2026-04-05
+Controlled comparative study of TDA-based vs classical statistical drift detectors on LLM embedding streams.
 
 ## Key Findings
 
-1. **Statistical methods dominate on natural topic drift**: Centroid shift, covariance, and MMD achieve AUC=1.0 on AG News topic drift (World/Sports/Business/Sci-Tech), while TDA methods reach AUC 0.49–0.93.
-2. **TDA has genuine advantage on topology-only drift**: In synthetic experiments where centroids are preserved but topology changes (blob→annulus), TDA H1 entropy achieves 12.3x separability vs 0.8x for centroid shift.
-3. **Best TDA method**: H0 Wasserstein distance (AUC=0.713 mean, 0.002s/window) is the most practical TDA detector for real embeddings.
-4. **Practical recommendation**: Use centroid + MMD as primary detectors; add TDA H1 features as a complementary secondary signal for geometric/structural drift.
+- **Statistical methods (covariance, MMD, centroid) achieve near-perfect detection** (AUC 0.92-1.0) on natural topic drift in sentence embeddings
+- **Best TDA method**: Wasserstein H1 distance (mean AUC=0.832), significantly outperforms kNN (p=0.0003)
+- **TDA's unique advantage**: On topology-specific drift (annular/loop emergence), TDA PE H1 achieves 19.3x separability where centroid shift fails (0.8x)
+- **Better FPR calibration**: TDA methods produce lower false positive rates (0.08-0.10) vs statistical methods (0.45-0.48) in small-sample regimes
+- **Practical recommendation**: Use covariance/MMD as primary detector + TDA Wasserstein H1 as complementary secondary detector (~40ms overhead on CPU)
 
-## Reproduction
+## Setup & Reproduction
 
 ```bash
-# Set up environment
-source .venv/bin/activate
+# Create and activate environment
+uv venv && source .venv/bin/activate
 
-# Run main experiment (requires AG News dataset in datasets/ag_news/)
-python src/drift_experiment.py
+# Install dependencies
+uv add numpy pandas scikit-learn scipy matplotlib seaborn ripser persim sentence-transformers datasets tqdm
 
-# Run supplementary synthetic experiment
-python src/synthetic_topology_experiment.py
+# Run experiments (~51 min on CPU)
+python src/experiment_v2.py
 ```
 
-**Runtime**: ~9 minutes on CPU (4.5 min embedding, 4.5 min drift detection)
-
-## File Structure
+## Project Structure
 
 ```
+.
+├── REPORT.md                    # Full research report with results
+├── planning.md                  # Research plan and hypothesis decomposition
+├── literature_review.md         # Literature review (17 papers)
+├── resources.md                 # Resource catalog
 ├── src/
-│   ├── drift_experiment.py          # Main experiment (AG News + 5 drift scenarios)
-│   └── synthetic_topology_experiment.py  # Synthetic topology-only drift
-├── results/
-│   ├── metrics.json                 # Per-method detection metrics
-│   ├── raw_results.jsonl            # Window-level outputs
-│   └── synthetic_results.csv       # Synthetic experiment results
-├── figures/
-│   ├── fig1_detection_by_drift_type.png
-│   ├── fig2_delay_vs_fpr.png
-│   ├── fig3_tda_vs_statistical.png
-│   ├── fig4_sensitivity_vs_window_size.png
-│   ├── fig5_persistence_examples.png
-│   ├── fig6_score_traces.png
-│   └── fig7_synthetic_topology_experiment.png
-├── datasets/ag_news/               # AG News dataset (see datasets/README.md)
-├── REPORT.md                       # Full research report
-└── planning.md                     # Research planning document
+│   ├── experiment_v2.py         # Main experiment (18 methods, 10 scenarios, 5 seeds)
+│   ├── drift_experiment.py      # Prior experiment (v1)
+│   └── synthetic_topology_experiment.py  # Prior synthetic experiment
+├── results_v2/                  # Output data
+│   ├── all_results.csv          # Full results table
+│   ├── metrics.json             # Per-method metrics
+│   ├── raw_results.jsonl        # Window-level outputs
+│   ├── summary.csv              # Aggregated summary
+│   └── synthetic_results.csv    # Synthetic experiment
+├── figures_v2/                  # Visualizations
+│   ├── fig1_auc_heatmap.png     # AUC by method × drift type
+│   ├── fig2_detection_delay.png # Detection delay comparison
+│   ├── fig3_tda_vs_stat.png     # TDA vs statistical overview
+│   ├── fig4_fpr_calibration.png # FPR on no-drift data
+│   ├── fig5_synthetic_separability.png  # Synthetic topology results
+│   ├── fig6_window_sensitivity.png      # AUC vs window size
+│   └── fig7_persistence_examples.png    # Example persistence diagrams
+├── papers/                      # Downloaded research papers (21)
+├── datasets/                    # AG News, 20 Newsgroups, DBpedia14
+└── code/                        # Cloned repos (ripser, giotto-tda, frouros, etc.)
 ```
 
-See [REPORT.md](REPORT.md) for the full research report with methodology, results, and analysis.
+## Methodology
 
-## Environment
+- **Datasets**: AG News (4 topics, 3K/class), 20 Newsgroups (6 categories, ~590/class)
+- **Embeddings**: `all-MiniLM-L6-v2` (384-dim, L2-normalized)
+- **18 detectors**: 5 statistical baselines + 13 TDA features (H0/H1 persistent entropy, Wasserstein/bottleneck distances, PHD, persistence statistics)
+- **10 drift scenarios**: abrupt, gradual, style shift, centroid-preserving, rotation, newsgroup close/distant, synthetic topology
+- **Evaluation**: AUC-ROC, detection delay, FPR, runtime; 5 seeds, 3 window sizes
 
-- Python 3.12.8, ripser 0.6.14, persim 0.3.8
-- sentence-transformers 5.3.0 (`all-MiniLM-L6-v2`, 384-dim)
-- numpy 2.4.4, scikit-learn 1.8.0, scipy 1.17.1
-- CPU-only (no GPU required)
+See [REPORT.md](REPORT.md) for full details.
