@@ -1,0 +1,21 @@
+{
+  "success": false,
+  "stages": {
+    "resource_finder": {
+      "success": true,
+      "completion_marker": "/workspaces/topo-drift-llm-embeds-5b03/.resource_finder_complete",
+      "outputs": {
+        "literature_review": "/workspaces/topo-drift-llm-embeds-5b03/literature_review.md",
+        "resources_catalog": "/workspaces/topo-drift-llm-embeds-5b03/resources.md",
+        "papers_dir": "/workspaces/topo-drift-llm-embeds-5b03/papers",
+        "datasets_dir": "/workspaces/topo-drift-llm-embeds-5b03/datasets",
+        "code_dir": "/workspaces/topo-drift-llm-embeds-5b03/code"
+      },
+      "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude.log",
+      "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude_transcript.jsonl",
+      "elapsed_time": 3157.697692632675
+    }
+  },
+  "work_dir": "/workspaces/topo-drift-llm-embeds-5b03",
+  "error": "Unknown format code 'f' for object of type 'str'"
+}

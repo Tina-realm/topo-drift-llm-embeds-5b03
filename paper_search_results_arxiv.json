@@ -1,0 +1,625 @@
+[
+  {
+    "id": "math/0607634v2",
+    "title": "A statistical approach to persistent homology",
+    "authors": [
+      "Peter Bubenik",
+      "Peter T. Kim"
+    ],
+    "year": 2006,
+    "abstract": "Assume that a finite set of points is randomly sampled from a subspace of a metric space. Recent advances in computational topology have provided several approaches to recovering the geometric and topological properties of the underlying space. In this paper we take a statistical approach to this pr",
+    "url": "http://arxiv.org/abs/math/0607634v2",
+    "pdf_url": "https://arxiv.org/pdf/math/0607634v2"
+  },
+  {
+    "id": "1904.05081v2",
+    "title": "Relative-perfectness of discrete gradient vector fields and multi-parameter persistent homology",
+    "authors": [
+      "Claudia Landi",
+      "Sara Scaramuccia"
+    ],
+    "year": 2019,
+    "abstract": "The combination of persistent homology and discrete Morse theory has proven very effective in visualizing and analyzing big and heterogeneous data. Indeed, topology provides computable and coarse summaries of data independently from specific coordinate systems and does so robustly to noise. Moreover",
+    "url": "http://arxiv.org/abs/1904.05081v2",
+    "pdf_url": "https://arxiv.org/pdf/1904.05081v2"
+  },
+  {
+    "id": "2512.07065v1",
+    "title": "Persistent Homology-Guided Frequency Filtering for Image Compression",
+    "authors": [
+      "Anil Chintapalli",
+      "Peter Tenholder",
+      "Henry Chen"
+    ],
+    "year": 2025,
+    "abstract": "Feature extraction in noisy image datasets presents many challenges in model reliability. In this paper, we use the discrete Fourier transform in conjunction with persistent homology analysis to extract specific frequencies that correspond with certain topological features of an image. This method a",
+    "url": "http://arxiv.org/abs/2512.07065v1",
+    "pdf_url": "https://arxiv.org/pdf/2512.07065v1"
+  },
+  {
+    "id": "1512.01700v5",
+    "title": "Stabilizing the unstable output of persistent homology computations",
+    "authors": [
+      "Paul Bendich",
+      "Peter Bubenik",
+      "Alexander Wagner"
+    ],
+    "year": 2015,
+    "abstract": "We propose a general technique for extracting a larger set of stable information from persistent homology computations than is currently done. The persistent homology algorithm is usually viewed as a procedure which starts with a filtered complex and ends with a persistence diagram. This procedure i",
+    "url": "http://arxiv.org/abs/1512.01700v5",
+    "pdf_url": "https://arxiv.org/pdf/1512.01700v5"
+  },
+  {
+    "id": "2008.00711v3",
+    "title": "A directed persistent homology theory for dissimilarity functions",
+    "authors": [
+      "David M\u00e9ndez",
+      "Rub\u00e9n J. S\u00e1nchez-Garc\u00eda"
+    ],
+    "year": 2020,
+    "abstract": "We develop a theory of persistent homology for directed simplicial complexes which detects persistent directed cycles in odd dimensions. We relate directed persistent homology to classical persistent homology, prove some stability results, and discuss the computational challenges of our approach. Ou",
+    "url": "http://arxiv.org/abs/2008.00711v3",
+    "pdf_url": "https://arxiv.org/pdf/2008.00711v3"
+  },
+  {
+    "id": "2207.11486v1",
+    "title": "Time Series Prediction under Distribution Shift using Differentiable Forgetting",
+    "authors": [
+      "Stefanos Bennett",
+      "Jase Clarkson"
+    ],
+    "year": 2022,
+    "abstract": "Time series prediction is often complicated by distribution shift which demands adaptive models to accommodate time-varying distributions. We frame time series prediction under distribution shift as a weighted empirical risk minimisation problem. The weighting of previous observations in the empiric",
+    "url": "http://arxiv.org/abs/2207.11486v1",
+    "pdf_url": "https://arxiv.org/pdf/2207.11486v1"
+  },
+  {
+    "id": "1009.5156v4",
+    "title": "Behavior of Quillen (co)homology with respect to adjunctions",
+    "authors": [
+      "Martin Frankland"
+    ],
+    "year": 2010,
+    "abstract": "This paper aims to answer the following question: Given an adjunction between two categories, how is Quillen (co)homology in one category related to that in the other? We identify the induced comparison diagram, giving necessary and sufficient conditions for it to arise, and describe the various com",
+    "url": "http://arxiv.org/abs/1009.5156v4",
+    "pdf_url": "https://arxiv.org/pdf/1009.5156v4"
+  },
+  {
+    "id": "2110.02458v3",
+    "title": "Magnitude homology of graphs and discrete Morse theory on Asao-Izumihara complexes",
+    "authors": [
+      "Yu Tajima",
+      "Masahiko Yoshinaga"
+    ],
+    "year": 2021,
+    "abstract": "Recently, Asao and Izumihara introduced CW-complexes whose homology groups are isomorphic to direct summands of the graph magnitude homology group. In this paper, we study the homotopy type of the CW-complexes in connection with the diagonality of magnitude homology groups. We prove that the Asao-Iz",
+    "url": "http://arxiv.org/abs/2110.02458v3",
+    "pdf_url": "https://arxiv.org/pdf/2110.02458v3"
+  },
+  {
+    "id": "1109.5052v1",
+    "title": "Alexander Duality for Functions: the Persistent Behavior of Land and Water and Shore",
+    "authors": [
+      "Herbert Edelsbrunner",
+      "Michael Kerber"
+    ],
+    "year": 2011,
+    "abstract": "This note contributes to the point calculus of persistent homology by extending Alexander duality to real-valued functions. Given a perfect Morse function $f: S^{n+1} \\to [0,1]$ and a decomposition $S^{n+1} = U \\cup V$ such that $M = \\U \\cap V$ is an $n$-manifold, we prove elementary relationships b",
+    "url": "http://arxiv.org/abs/1109.5052v1",
+    "pdf_url": "https://arxiv.org/pdf/1109.5052v1"
+  },
+  {
+    "id": "2207.05796v1",
+    "title": "Estimating Test Performance for AI Medical Devices under Distribution Shift with Conformal Prediction",
+    "authors": [
+      "Charles Lu",
+      "Syed Rakin Ahmed",
+      "Praveer Singh"
+    ],
+    "year": 2022,
+    "abstract": "Estimating the test performance of software AI-based medical devices under distribution shifts is crucial for evaluating the safety, efficiency, and usability prior to clinical deployment. Due to the nature of regulated medical device software and the difficulty in acquiring large amounts of labeled",
+    "url": "http://arxiv.org/abs/2207.05796v1",
+    "pdf_url": "https://arxiv.org/pdf/2207.05796v1"
+  },
+  {
+    "id": "1907.02664v2",
+    "title": "Data Encoding for Byzantine-Resilient Distributed Optimization",
+    "authors": [
+      "Deepesh Data",
+      "Linqi Song",
+      "Suhas Diggavi"
+    ],
+    "year": 2019,
+    "abstract": "We study distributed optimization in the presence of Byzantine adversaries, where both data and computation are distributed among $m$ worker machines, $t$ of which may be corrupt. The compromised nodes may collaboratively and arbitrarily deviate from their pre-specified programs, and a designated (m",
+    "url": "http://arxiv.org/abs/1907.02664v2",
+    "pdf_url": "https://arxiv.org/pdf/1907.02664v2"
+  },
+  {
+    "id": "2005.07866v1",
+    "title": "Byzantine-Resilient SGD in High Dimensions on Heterogeneous Data",
+    "authors": [
+      "Deepesh Data",
+      "Suhas Diggavi"
+    ],
+    "year": 2020,
+    "abstract": "We study distributed stochastic gradient descent (SGD) in the master-worker architecture under Byzantine attacks. We consider the heterogeneous data model, where different workers may have different local datasets, and we do not make any probabilistic assumptions on data generation. At the core of o",
+    "url": "http://arxiv.org/abs/2005.07866v1",
+    "pdf_url": "https://arxiv.org/pdf/2005.07866v1"
+  },
+  {
+    "id": "1110.5626v1",
+    "title": "Constraints on dark energy from H II starburst galaxy apparent magnitude versus redshift data",
+    "authors": [
+      "Data Mania",
+      "Bharat Ratra"
+    ],
+    "year": 2011,
+    "abstract": "In this paper we use H II starburst galaxy apparent magnitude versus redshift data from Siegel et al. (2005) to constrain dark energy cosmological model parameters. These constraints are generally consistent with those derived using other data sets, but are not as restrictive as the tightest current",
+    "url": "http://arxiv.org/abs/1110.5626v1",
+    "pdf_url": "https://arxiv.org/pdf/1110.5626v1"
+  },
+  {
+    "id": "2510.21391v1",
+    "title": "TerraGen: A Unified Multi-Task Layout Generation Framework for Remote Sensing Data Augmentation",
+    "authors": [
+      "Datao Tang",
+      "Hao Wang",
+      "Yudeng Xin"
+    ],
+    "year": 2025,
+    "abstract": "Remote sensing vision tasks require extensive labeled data across multiple, interconnected domains. However, current generative data augmentation frameworks are task-isolated, i.e., each vision task requires training an independent generative model, and ignores the modeling of geographical informati",
+    "url": "http://arxiv.org/abs/2510.21391v1",
+    "pdf_url": "https://arxiv.org/pdf/2510.21391v1"
+  },
+  {
+    "id": "physics/0104029v1",
+    "title": "How Many Genes Are Needed for a Discriminant Microarray Data Analysis ?",
+    "authors": [
+      "Wentian Li",
+      "Yaning Yang"
+    ],
+    "year": 2001,
+    "abstract": "The analysis of the leukemia data from Whitehead/MIT group is a discriminant analysis (also called a supervised learning). Among thousands of genes whose expression levels are measured, not all are needed for discriminant analysis: a gene may either not contribute to the separation of two types of t",
+    "url": "http://arxiv.org/abs/physics/0104029v1",
+    "pdf_url": "https://arxiv.org/pdf/physics/0104029v1"
+  },
+  {
+    "id": "2411.15497v3",
+    "title": "AeroGen: Enhancing Remote Sensing Object Detection with Diffusion-Driven Data Generation",
+    "authors": [
+      "Datao Tang",
+      "Xiangyong Cao",
+      "Xuan Wu"
+    ],
+    "year": 2024,
+    "abstract": "Remote sensing image object detection (RSIOD) aims to identify and locate specific objects within satellite or aerial imagery. However, there is a scarcity of labeled data in current RSIOD datasets, which significantly limits the performance of current detection algorithms. Although existing techniq",
+    "url": "http://arxiv.org/abs/2411.15497v3",
+    "pdf_url": "https://arxiv.org/pdf/2411.15497v3"
+  },
+  {
+    "id": "2010.16064v1",
+    "title": "A 20 Gbps Data Transmitting ASIC with PAM4 for Particle Physics Experiments",
+    "authors": [
+      "Li Zhang",
+      "Datao Gong",
+      "Suen Hou"
+    ],
+    "year": 2020,
+    "abstract": "We present the design principle and test results of a data transmitting ASIC, GBS20, for particle physics experiments. The goal of GBS20 will be an ASIC that employs two serializers each from the 10.24 Gbps lpGBT SerDes, sharing the PLL also from lpGBT. A PAM4 encoder plus a VCSEL driver will be imp",
+    "url": "http://arxiv.org/abs/2010.16064v1",
+    "pdf_url": "https://arxiv.org/pdf/2010.16064v1"
+  },
+  {
+    "id": "1811.04757v3",
+    "title": "DTM-based Filtrations",
+    "authors": [
+      "Hirokazu Anai",
+      "Fr\u00e9d\u00e9ric Chazal",
+      "Marc Glisse"
+    ],
+    "year": 2018,
+    "abstract": "Despite strong stability properties, the persistent homology of filtrations classically used in Topological Data Analysis, such as, e.g. the Cech or Vietoris-Rips filtrations, are very sensitive to the presence of outliers in the data from which they are computed. In this paper, we introduce and stu",
+    "url": "http://arxiv.org/abs/1811.04757v3",
+    "pdf_url": "https://arxiv.org/pdf/1811.04757v3"
+  },
+  {
+    "id": "2507.11773v1",
+    "title": "Small Data Explainer -- The impact of small data methods in everyday life",
+    "authors": [
+      "Maren Hackenberg",
+      "Sophia G. Connor",
+      "Fabian Kabus"
+    ],
+    "year": 2025,
+    "abstract": "The emergence of breakthrough artificial intelligence (AI) techniques has led to a renewed focus on how small data settings, i.e., settings with limited information, can benefit from such developments. This includes societal issues such as how best to include under-represented groups in data-driven ",
+    "url": "http://arxiv.org/abs/2507.11773v1",
+    "pdf_url": "https://arxiv.org/pdf/2507.11773v1"
+  },
+  {
+    "id": "2305.08977v2",
+    "title": "Autoencoder-based Anomaly Detection in Streaming Data with Incremental Learning and Concept Drift Adaptation",
+    "authors": [
+      "Jin Li",
+      "Kleanthis Malialis",
+      "Marios M. Polycarpou"
+    ],
+    "year": 2023,
+    "abstract": "In our digital universe nowadays, enormous amount of data are produced in a streaming manner in a variety of application areas. These data are often unlabelled. In this case, identifying infrequent events, such as anomalies, poses a great challenge. This problem becomes even more difficult in non-st",
+    "url": "http://arxiv.org/abs/2305.08977v2",
+    "pdf_url": "https://arxiv.org/pdf/2305.08977v2"
+  },
+  {
+    "id": "1106.3842v1",
+    "title": "Night-sky brightness monitoring in Hong Kong - a city-wide light pollution assessment",
+    "authors": [
+      "Chun Shing Jason Pun",
+      "Chu Wing So"
+    ],
+    "year": 2011,
+    "abstract": "Results of the first comprehensive light pollution survey in Hong Kong are presented. The night-sky brightness was measured and monitored around the city using a portable light sensing device called the Sky Quality Meter over a 15-month period beginning in March 2008. A total of 1,957 data sets were",
+    "url": "http://arxiv.org/abs/1106.3842v1",
+    "pdf_url": "https://arxiv.org/pdf/1106.3842v1"
+  },
+  {
+    "id": "2410.10814v2",
+    "title": "Your Mixture-of-Experts LLM Is Secretly an Embedding Model For Free",
+    "authors": [
+      "Ziyue Li",
+      "Tianyi Zhou"
+    ],
+    "year": 2024,
+    "abstract": "While large language models (LLMs) excel on generation tasks, their decoder-only architecture often limits their potential as embedding models if no further representation finetuning is applied. Does this contradict their claim of generalists? To answer the question, we take a closer look at Mixture",
+    "url": "http://arxiv.org/abs/2410.10814v2",
+    "pdf_url": "https://arxiv.org/pdf/2410.10814v2"
+  },
+  {
+    "id": "2112.03057v1",
+    "title": "Thinking Beyond Distributions in Testing Machine Learned Models",
+    "authors": [
+      "Negar Rostamzadeh",
+      "Ben Hutchinson",
+      "Christina Greer"
+    ],
+    "year": 2021,
+    "abstract": "Testing practices within the machine learning (ML) community have centered around assessing a learned model's predictive performance measured against a test dataset, often drawn from the same distribution as the training dataset. While recent work on robustness and fairness testing within the ML com",
+    "url": "http://arxiv.org/abs/2112.03057v1",
+    "pdf_url": "https://arxiv.org/pdf/2112.03057v1"
+  },
+  {
+    "id": "2601.12359v1",
+    "title": "Zero-Shot Embedding Drift Detection: A Lightweight Defense Against Prompt Injections in LLMs",
+    "authors": [
+      "Anirudh Sekar",
+      "Mrinal Agarwal",
+      "Rachel Sharma"
+    ],
+    "year": 2026,
+    "abstract": "Prompt injection attacks have become an increasing vulnerability for LLM applications, where adversarial prompts exploit indirect input channels such as emails or user-generated content to circumvent alignment safeguards and induce harmful or unintended outputs. Despite advances in alignment, even s",
+    "url": "http://arxiv.org/abs/2601.12359v1",
+    "pdf_url": "https://arxiv.org/pdf/2601.12359v1"
+  },
+  {
+    "id": "1411.5213v1",
+    "title": "Security in Monitoring Schemes: A Survey",
+    "authors": [
+      "Atul Vaibhav"
+    ],
+    "year": 2014,
+    "abstract": "With our growing reliability on distributed networks, the security aspect of such networks becomes of prime importance. In large scale distributed networks it becomes cardinal to have an efficient and effective monitoring scheme. The monitoring schemes supervise the node behaviour in the network and",
+    "url": "http://arxiv.org/abs/1411.5213v1",
+    "pdf_url": "https://arxiv.org/pdf/1411.5213v1"
+  },
+  {
+    "id": "2510.16374v1",
+    "title": "Before you <think>, monitor: Implementing Flavell's metacognitive framework in LLMs",
+    "authors": [
+      "Nick Oh"
+    ],
+    "year": 2025,
+    "abstract": "Current approaches to enhancing LLM reasoning follows two isolated paradigms: Monitor-Generate methods like Plan-and-Solve (Wang et al., 2023) and SELF-DISCOVER (Zhou et al., 2024) excel at strategic planning but lack mechanisms to verify whether selected strategies succeed; while Generate-Verify ap",
+    "url": "http://arxiv.org/abs/2510.16374v1",
+    "pdf_url": "https://arxiv.org/pdf/2510.16374v1"
+  },
+  {
+    "id": "2512.08088v1",
+    "title": "Adaptation of Embedding Models to Financial Filings via LLM Distillation",
+    "authors": [
+      "Eliot Brenner",
+      "Dominic Seyler",
+      "Manjunath Hegde"
+    ],
+    "year": 2025,
+    "abstract": "Despite advances in generative large language models (LLMs), practical application of specialized conversational AI agents remains constrained by computation costs, latency requirements, and the need for precise domain-specific relevance measures. While existing embedding models address the first tw",
+    "url": "http://arxiv.org/abs/2512.08088v1",
+    "pdf_url": "https://arxiv.org/pdf/2512.08088v1"
+  },
+  {
+    "id": "1005.0367v1",
+    "title": "VERITAS 2008 - 2009 monitoring of the variable gamma-ray source M87",
+    "authors": [
+      "The VERITAS Collaboration",
+      "V. A. Acciari",
+      "E. Aliu"
+    ],
+    "year": 2010,
+    "abstract": "M87 is a nearby radio galaxy that is detected at energies ranging from radio to VHE gamma-rays.  Its proximity and its jet, misaligned from our line-of-sight, enable detailed morphological studies and extensive modeling at radio, optical, and X-ray energies.  Flaring activity was observed at all ene",
+    "url": "http://arxiv.org/abs/1005.0367v1",
+    "pdf_url": "https://arxiv.org/pdf/1005.0367v1"
+  },
+  {
+    "id": "2505.06386v2",
+    "title": "Embedding Atlas: Low-Friction, Interactive Embedding Visualization",
+    "authors": [
+      "Donghao Ren",
+      "Fred Hohman",
+      "Halden Lin"
+    ],
+    "year": 2025,
+    "abstract": "Embedding projections are popular for visualizing large datasets and models. However, people often encounter \"friction\" when using embedding visualization tools: (1) barriers to adoption, e.g., tedious data wrangling and loading, scalability limits, no integration of results into existing workflows,",
+    "url": "http://arxiv.org/abs/2505.06386v2",
+    "pdf_url": "https://arxiv.org/pdf/2505.06386v2"
+  },
+  {
+    "id": "1912.01500v1",
+    "title": "Nonintrusive Load Monitoring for Machines used in Manufacturing",
+    "authors": [
+      "Christian Gebbe"
+    ],
+    "year": 2019,
+    "abstract": "In order to increase the electric energy efficiency of production machines, it is necessary to determine the energy demand of the constituent electric loads. Therefore, a new measurement system based on nonintrusive load monitoring is proposed in this paper. It only measures the voltage and current ",
+    "url": "http://arxiv.org/abs/1912.01500v1",
+    "pdf_url": "https://arxiv.org/pdf/1912.01500v1"
+  },
+  {
+    "id": "2407.05375v1",
+    "title": "Online Drift Detection with Maximum Concept Discrepancy",
+    "authors": [
+      "Ke Wan",
+      "Yi Liang",
+      "Susik Yoon"
+    ],
+    "year": 2024,
+    "abstract": "Continuous learning from an immense volume of data streams becomes exceptionally critical in the internet era. However, data streams often do not conform to the same distribution over time, leading to a phenomenon called concept drift. Since a fixed static model is unreliable for inferring concept-d",
+    "url": "http://arxiv.org/abs/2407.05375v1",
+    "pdf_url": "https://arxiv.org/pdf/2407.05375v1"
+  },
+  {
+    "id": "1707.07821v6",
+    "title": "Concept Drift Detection and Adaptation with Hierarchical Hypothesis Testing",
+    "authors": [
+      "Shujian Yu",
+      "Zubin Abraham",
+      "Heng Wang"
+    ],
+    "year": 2017,
+    "abstract": "A fundamental issue for statistical classification models in a streaming environment is that the joint distribution between predictor and response variables changes over time (a phenomenon also known as concept drifts), such that their classification performance deteriorates dramatically. In this pa",
+    "url": "http://arxiv.org/abs/1707.07821v6",
+    "pdf_url": "https://arxiv.org/pdf/1707.07821v6"
+  },
+  {
+    "id": "2104.10529v1",
+    "title": "A Lightweight Concept Drift Detection and Adaptation Framework for IoT Data Streams",
+    "authors": [
+      "Li Yang",
+      "Abdallah Shami"
+    ],
+    "year": 2021,
+    "abstract": "In recent years, with the increasing popularity of \"Smart Technology\", the number of Internet of Things (IoT) devices and systems have surged significantly. Various IoT services and functionalities are based on the analytics of IoT streaming data. However, IoT data analytics faces concept drift chal",
+    "url": "http://arxiv.org/abs/2104.10529v1",
+    "pdf_url": "https://arxiv.org/pdf/2104.10529v1"
+  },
+  {
+    "id": "1811.01102v3",
+    "title": "A simplified disproof of Beck's three permutations conjecture and an application to root-mean-squared discrepancy",
+    "authors": [
+      "Cole Franks"
+    ],
+    "year": 2018,
+    "abstract": "A $k$-permutation family on $n$ vertices is a set system consisting of the intervals of $k$ permutations of the integers $1$ through $n$. The discrepancy of a set system is the minimum over all red-blue vertex colorings of the maximum difference between the number of red and blue vertices in any set",
+    "url": "http://arxiv.org/abs/1811.01102v3",
+    "pdf_url": "https://arxiv.org/pdf/1811.01102v3"
+  },
+  {
+    "id": "2404.02572v2",
+    "title": "Incremental Learning with Concept Drift Detection and Prototype-based Embeddings for Graph Stream Classification",
+    "authors": [
+      "Kleanthis Malialis",
+      "Jin Li",
+      "Christos G. Panayiotou"
+    ],
+    "year": 2024,
+    "abstract": "Data stream mining aims at extracting meaningful knowledge from continually evolving data streams, addressing the challenges posed by nonstationary environments, particularly, concept drift which refers to a change in the underlying data distribution over time. Graph structures offer a powerful mode",
+    "url": "http://arxiv.org/abs/2404.02572v2",
+    "pdf_url": "https://arxiv.org/pdf/2404.02572v2"
+  },
+  {
+    "id": "2109.05013v1",
+    "title": "PWPAE: An Ensemble Framework for Concept Drift Adaptation in IoT Data Streams",
+    "authors": [
+      "Li Yang",
+      "Dimitrios Michael Manias",
+      "Abdallah Shami"
+    ],
+    "year": 2021,
+    "abstract": "As the number of Internet of Things (IoT) devices and systems have surged, IoT data analytics techniques have been developed to detect malicious cyber-attacks and secure IoT systems; however, concept drift issues often occur in IoT data analytics, as IoT data is often dynamic data streams that chang",
+    "url": "http://arxiv.org/abs/2109.05013v1",
+    "pdf_url": "https://arxiv.org/pdf/2109.05013v1"
+  },
+  {
+    "id": "1809.09702v1",
+    "title": "The Origins Space Telescope (OST) Mission Concept Study Interim Report",
+    "authors": [
+      "The OST mission concept study team"
+    ],
+    "year": 2018,
+    "abstract": "The Origins Space Telescope (OST) will transform our understanding of the Universe, from formation of the earliest galaxies to the creation of habitable worlds. OST's Mission Concept 1, the subject of this report, features a cold (4 K) large-aperture telescope (9.1 m) and five powerful instruments, ",
+    "url": "http://arxiv.org/abs/1809.09702v1",
+    "pdf_url": "https://arxiv.org/pdf/1809.09702v1"
+  },
+  {
+    "id": "2305.08977v2",
+    "title": "Autoencoder-based Anomaly Detection in Streaming Data with Incremental Learning and Concept Drift Adaptation",
+    "authors": [
+      "Jin Li",
+      "Kleanthis Malialis",
+      "Marios M. Polycarpou"
+    ],
+    "year": 2023,
+    "abstract": "In our digital universe nowadays, enormous amount of data are produced in a streaming manner in a variety of application areas. These data are often unlabelled. In this case, identifying infrequent events, such as anomalies, poses a great challenge. This problem becomes even more difficult in non-st",
+    "url": "http://arxiv.org/abs/2305.08977v2",
+    "pdf_url": "https://arxiv.org/pdf/2305.08977v2"
+  },
+  {
+    "id": "cond-mat/0212198v4",
+    "title": "Maximum Entropy approach to a Mean Field Theory for Fluids",
+    "authors": [
+      "Chih-Yuan Tseng",
+      "Ariel Caticha"
+    ],
+    "year": 2002,
+    "abstract": "Making statistical predictions requires tackling two problems: one must assign appropriate probability distributions and then one must calculate a variety of expected values. The method of maximum entropy is commonly used to address the first problem. Here we explore its use to tackle the second pro",
+    "url": "http://arxiv.org/abs/cond-mat/0212198v4",
+    "pdf_url": "https://arxiv.org/pdf/cond-mat/0212198v4"
+  },
+  {
+    "id": "1710.06940v1",
+    "title": "Concept Drift Learning with Alternating Learners",
+    "authors": [
+      "Yunwen Xu",
+      "Rui Xu",
+      "Weizhong Yan"
+    ],
+    "year": 2017,
+    "abstract": "Data-driven predictive analytics are in use today across a number of industrial applications, but further integration is hindered by the requirement of similarity among model training and test data distributions. This paper addresses the need of learning from possibly nonstationary data streams, or ",
+    "url": "http://arxiv.org/abs/1710.06940v1",
+    "pdf_url": "https://arxiv.org/pdf/1710.06940v1"
+  },
+  {
+    "id": "2305.08977v2",
+    "title": "Autoencoder-based Anomaly Detection in Streaming Data with Incremental Learning and Concept Drift Adaptation",
+    "authors": [
+      "Jin Li",
+      "Kleanthis Malialis",
+      "Marios M. Polycarpou"
+    ],
+    "year": 2023,
+    "abstract": "In our digital universe nowadays, enormous amount of data are produced in a streaming manner in a variety of application areas. These data are often unlabelled. In this case, identifying infrequent events, such as anomalies, poses a great challenge. This problem becomes even more difficult in non-st",
+    "url": "http://arxiv.org/abs/2305.08977v2",
+    "pdf_url": "https://arxiv.org/pdf/2305.08977v2"
+  },
+  {
+    "id": "1707.07821v6",
+    "title": "Concept Drift Detection and Adaptation with Hierarchical Hypothesis Testing",
+    "authors": [
+      "Shujian Yu",
+      "Zubin Abraham",
+      "Heng Wang"
+    ],
+    "year": 2017,
+    "abstract": "A fundamental issue for statistical classification models in a streaming environment is that the joint distribution between predictor and response variables changes over time (a phenomenon also known as concept drifts), such that their classification performance deteriorates dramatically. In this pa",
+    "url": "http://arxiv.org/abs/1707.07821v6",
+    "pdf_url": "https://arxiv.org/pdf/1707.07821v6"
+  },
+  {
+    "id": "2404.02572v2",
+    "title": "Incremental Learning with Concept Drift Detection and Prototype-based Embeddings for Graph Stream Classification",
+    "authors": [
+      "Kleanthis Malialis",
+      "Jin Li",
+      "Christos G. Panayiotou"
+    ],
+    "year": 2024,
+    "abstract": "Data stream mining aims at extracting meaningful knowledge from continually evolving data streams, addressing the challenges posed by nonstationary environments, particularly, concept drift which refers to a change in the underlying data distribution over time. Graph structures offer a powerful mode",
+    "url": "http://arxiv.org/abs/2404.02572v2",
+    "pdf_url": "https://arxiv.org/pdf/2404.02572v2"
+  },
+  {
+    "id": "2104.10529v1",
+    "title": "A Lightweight Concept Drift Detection and Adaptation Framework for IoT Data Streams",
+    "authors": [
+      "Li Yang",
+      "Abdallah Shami"
+    ],
+    "year": 2021,
+    "abstract": "In recent years, with the increasing popularity of \"Smart Technology\", the number of Internet of Things (IoT) devices and systems have surged significantly. Various IoT services and functionalities are based on the analytics of IoT streaming data. However, IoT data analytics faces concept drift chal",
+    "url": "http://arxiv.org/abs/2104.10529v1",
+    "pdf_url": "https://arxiv.org/pdf/2104.10529v1"
+  },
+  {
+    "id": "1905.05095v3",
+    "title": "Do Kernel and Neural Embeddings Help in Training and Generalization?",
+    "authors": [
+      "Arman Rahbar",
+      "Emilio Jorge",
+      "Devdatt Dubhashi"
+    ],
+    "year": 2019,
+    "abstract": "Recent results on optimization and generalization properties of neural networks showed that in a simple two-layer network, the alignment of the labels to the eigenvectors of the corresponding Gram matrix determines the convergence of the optimization during training. Such analyses also provide upper",
+    "url": "http://arxiv.org/abs/1905.05095v3",
+    "pdf_url": "https://arxiv.org/pdf/1905.05095v3"
+  },
+  {
+    "id": "2306.14753v1",
+    "title": "The Deep Arbitrary Polynomial Chaos Neural Network or how Deep Artificial Neural Networks could benefit from Data-Driven Homogeneous Chaos Theory",
+    "authors": [
+      "Sergey Oladyshkin",
+      "Timothy Praditia",
+      "Ilja Kr\u00f6ker"
+    ],
+    "year": 2023,
+    "abstract": "Artificial Intelligence and Machine learning have been widely used in various fields of mathematical computing, physical modeling, computational science, communication science, and stochastic analysis. Approaches based on Deep Artificial Neural Networks (DANN) are very popular in our days. Depending",
+    "url": "http://arxiv.org/abs/2306.14753v1",
+    "pdf_url": "https://arxiv.org/pdf/2306.14753v1"
+  },
+  {
+    "id": "2310.02576v2",
+    "title": "A Prototype-Based Neural Network for Image Anomaly Detection and Localization",
+    "authors": [
+      "Chao Huang",
+      "Zhao Kang",
+      "Hong Wu"
+    ],
+    "year": 2023,
+    "abstract": "Image anomaly detection and localization perform not only image-level anomaly classification but also locate pixel-level anomaly regions. Recently, it has received much research attention due to its wide application in various fields. This paper proposes ProtoAD, a prototype-based neural network for",
+    "url": "http://arxiv.org/abs/2310.02576v2",
+    "pdf_url": "https://arxiv.org/pdf/2310.02576v2"
+  },
+  {
+    "id": "1609.04846v1",
+    "title": "A Tutorial about Random Neural Networks in Supervised Learning",
+    "authors": [
+      "Sebasti\u00e1n Basterrech",
+      "Gerardo Rubino"
+    ],
+    "year": 2016,
+    "abstract": "Random Neural Networks (RNNs) are a class of Neural Networks (NNs) that can also be seen as a specific type of queuing network. They have been successfully used in several domains during the last 25 years, as queuing networks to analyze the performance of resource sharing in many engineering areas, ",
+    "url": "http://arxiv.org/abs/1609.04846v1",
+    "pdf_url": "https://arxiv.org/pdf/1609.04846v1"
+  },
+  {
+    "id": "1905.05918v1",
+    "title": "A Neural Network-Evolutionary Computational Framework for Remaining Useful Life Estimation of Mechanical Systems",
+    "authors": [
+      "David Laredo",
+      "Zhaoyin Chen",
+      "Oliver Sch\u00fctze"
+    ],
+    "year": 2019,
+    "abstract": "This paper presents a framework for estimating the remaining useful life (RUL) of mechanical systems. The framework consists of a multi-layer perceptron and an evolutionary algorithm for optimizing the data-related parameters. The framework makes use of a strided time window to estimate the RUL for ",
+    "url": "http://arxiv.org/abs/1905.05918v1",
+    "pdf_url": "https://arxiv.org/pdf/1905.05918v1"
+  },
+  {
+    "id": "2307.05639v2",
+    "title": "Learning Active Subspaces and Discovering Important Features with Gaussian Radial Basis Functions Neural Networks",
+    "authors": [
+      "Danny D'Agostino",
+      "Ilija Ilievski",
+      "Christine Annette Shoemaker"
+    ],
+    "year": 2023,
+    "abstract": "Providing a model that achieves a strong predictive performance and is simultaneously interpretable by humans is one of the most difficult challenges in machine learning research due to the conflicting nature of these two objectives. To address this challenge, we propose a modification of the radial",
+    "url": "http://arxiv.org/abs/2307.05639v2",
+    "pdf_url": "https://arxiv.org/pdf/2307.05639v2"
+  }
+]
