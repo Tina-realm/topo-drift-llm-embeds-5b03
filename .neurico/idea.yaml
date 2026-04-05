@@ -1,0 +1,227 @@
+idea:
+  title: Topological Drift Detection for Continuous Monitoring of LLM Embedding Streams
+  domain: machine_learning
+  hypothesis: 'Persistent-homology-based summaries of embedding point clouds can detect
+
+    distribution drift in deployed LLM input streams more sensitively and
+
+    robustly than conventional unsupervised drift detectors such as centroid
+
+    shift, covariance shift, and maximum mean discrepancy (MMD), especially
+
+    when the drift alters geometric or semantic structure without large changes
+
+    in low-order statistics.
+
+    '
+  background:
+    description: 'Continuous monitoring is a core requirement for trustworthy deployment
+
+      of AI systems. Existing drift detection methods often rely on statistical
+
+      divergence measures or distributional assumptions that may fail to capture
+
+      subtle geometric changes in high-dimensional embedding spaces.
+
+
+      Topological data analysis (TDA), especially persistent homology, offers
+
+      a mathematically principled way to summarize multi-scale structure in
+
+      data. By computing topological signatures such as Betti numbers,
+
+      persistence diagrams, and persistence-based summary statistics on windows
+
+      of embeddings, we may be able to identify distribution drift that is
+
+      invisible to classical detectors.
+
+
+      This research investigates whether TDA-based drift scores can provide a
+
+      model-agnostic and operationally useful signal for continuous monitoring
+
+      of deployed LLM systems, with applications to mission-critical AI
+
+      settings where reliable lifecycle monitoring is essential.
+
+      '
+    papers:
+    - url: https://arxiv.org/abs/2205.13147
+      description: A practical review of topological data analysis for machine learning
+    - url: https://arxiv.org/abs/2105.03468
+      description: Survey or representative work on persistent homology in machine
+        learning applications
+    - url: https://arxiv.org/abs/2007.01882
+      description: Representative work on drift detection / distribution shift in
+        ML systems
+    datasets:
+    - name: AG News / domain-shifted text samples
+      source: Hugging Face datasets
+      description: 'Text corpora used to generate embedding windows under controlled
+
+        topic and domain drift settings.
+
+        '
+      size: 10K-100K text samples
+    - name: Multi-domain sentence datasets
+      source: Hugging Face datasets or public benchmark corpora
+      description: 'Public text datasets spanning multiple topics, styles, or domains
+
+        for synthetic and semi-realistic drift scenarios.
+
+        '
+      size: Variable
+  methodology:
+    approach: Controlled comparative study of topology-based and statistical drift
+      detectors on embedding streams
+    steps:
+    - Select one or more embedding models for text representation
+    - Construct baseline embedding streams from a reference corpus
+    - 'Create controlled drift scenarios: topic drift, style drift, domain drift,
+      gradual drift, and mixed drift'
+    - Partition embeddings into time windows and subsample point clouds for computational
+      tractability
+    - 'Compute classical drift signals: centroid shift, covariance-based shift, kNN
+      distance shift, and MMD'
+    - 'Compute topological summaries: Betti curves, persistence diagrams, persistence
+      entropy, and diagram distances'
+    - Define drift scores over consecutive windows and calibrate alarm thresholds
+      on baseline windows
+    - Compare methods on detection delay, false positive rate, robustness to noise,
+      and sample efficiency
+    - Analyze cases where topology detects drift missed by standard methods
+    - Measure computational overhead and assess feasibility for continuous monitoring
+    baselines:
+    - Centroid mean shift
+    - Covariance or PCA-based shift detection
+    - Maximum mean discrepancy (MMD)
+    - kNN-distance or density-based unsupervised drift score
+    - Random alarm / no-drift baseline for sanity check
+    metrics:
+    - Detection accuracy
+    - Detection delay
+    - False positive rate
+    - Precision / recall for drift events
+    - Area under detection curve across thresholds
+    - Sample efficiency (performance vs window size)
+    - Robustness to noise and subsampling
+    - Runtime and memory cost per monitoring window
+  constraints:
+    compute: cpu_only
+    time_limit: 10800
+    memory: 16GB
+    budget: $100
+    dependencies:
+    - numpy
+    - pandas
+    - scikit-learn
+    - scipy
+    - matplotlib
+    - seaborn
+    - ripser
+    - persim
+    - giotto-tda
+    - sentence-transformers
+    - datasets
+    - tqdm
+  expected_outputs:
+  - type: metrics
+    format: json
+    fields:
+    - method
+    - drift_type
+    - window_size
+    - detection_accuracy
+    - detection_delay
+    - false_positive_rate
+    - runtime
+    description: Comparative performance metrics for each drift detection method
+  - type: visualization
+    format: png
+    description: 'Plots showing:
+
+      1. Detection performance by drift type
+
+      2. Detection delay vs false positive trade-off
+
+      3. Topology-based vs statistical method comparison
+
+      4. Sensitivity vs window size
+
+      5. Example persistence summaries before and after drift
+
+      '
+  - type: data
+    format: jsonl
+    description: 'Raw experimental results including:
+
+      - Drift scenario metadata
+
+      - Window-level detector outputs
+
+      - Topological summary statistics
+
+      - Baseline method scores
+
+      - Runtime measurements
+
+      '
+  - type: report
+    format: markdown
+    description: 'Comprehensive analysis including:
+
+      - Experimental design and drift taxonomy
+
+      - Quantitative comparison of methods
+
+      - Failure mode analysis
+
+      - Practical implications for continuous AI monitoring
+
+      - Limitations and future research directions
+
+      '
+  evaluation_criteria:
+  - Topology-based detector outperforms at least one standard baseline on at least
+    two drift types
+  - False positive rate is calibrated and reported on no-drift windows
+  - Detection delay is measured for gradual and abrupt drift settings
+  - Results are reproducible across at least 3 random seeds
+  - Computational cost is reported and discussed for deployment feasibility
+  - Failure cases are analyzed qualitatively with representative examples
+  - Code runs end-to-end and produces all expected outputs
+  - Discussion clearly states when TDA helps and when it does not
+  metadata:
+    author: tina
+    tags:
+    - topological-data-analysis
+    - persistent-homology
+    - drift-detection
+    - llm-monitoring
+    - embedding-space
+    - trustworthy-ai
+    - continuous-monitoring
+    priority: high
+    estimated_duration: 4 hours
+    notes: 'This project studies whether topological summaries of embedding streams
+
+      can serve as a mathematically grounded drift signal for deployed AI
+
+      monitoring workflows.
+
+
+      Important considerations:
+
+      - Persistent homology can be computationally expensive in high dimensions
+
+      - Subsampling or dimensionality reduction may be necessary
+
+      - Drift scenarios should include both abrupt and gradual changes
+
+      - The study should compare practical utility, not only theoretical novelty'
+    idea_id: topological_drift_detection_fo_20260405_064711_80b7cdae
+    created_at: '2026-04-05T06:47:11.470076'
+    status: submitted
+    github_repo_name: topo-drift-llm-embeds-5b03
+    github_repo_url: https://github.com/Tina-realm/topo-drift-llm-embeds-5b03
