@@ -1,5 +1,5 @@
 {
-  "success": false,
+  "success": true,
   "stages": {
     "resource_finder": {
       "success": true,
@@ -13,9 +13,15 @@
       },
       "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude.log",
       "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/resource_finder_claude_transcript.jsonl",
-      "elapsed_time": 3157.697692632675
+      "elapsed_time": 560.9754900932312
+    },
+    "experiment_runner": {
+      "success": true,
+      "return_code": 0,
+      "elapsed_time": 5174.464672088623,
+      "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude.log",
+      "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude_transcript.jsonl"
     }
   },
-  "work_dir": "/workspaces/topo-drift-llm-embeds-5b03",
-  "error": "Unknown format code 'f' for object of type 'str'"
+  "work_dir": "/workspaces/topo-drift-llm-embeds-5b03"
 }

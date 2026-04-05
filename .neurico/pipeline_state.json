@@ -3,8 +3,8 @@
   "stages": {
     "resource_finder": {
       "status": "completed",
-      "started_at": "2026-04-05T06:49:22.741566",
-      "completed_at": "2026-04-05T07:42:00.442303",
+      "started_at": "2026-04-05T11:55:17.779333",
+      "completed_at": "2026-04-05T12:04:38.758894",
       "success": true,
       "outputs": {
         "literature_review": "/workspaces/topo-drift-llm-embeds-5b03/literature_review.md",
@@ -15,16 +15,20 @@
       }
     },
     "experiment_runner": {
-      "status": "failed",
-      "started_at": "2026-04-05T07:42:00.442776",
-      "completed_at": "2026-04-05T07:42:00.448345",
-      "success": false,
+      "status": "completed",
+      "started_at": "2026-04-05T12:04:38.759378",
+      "completed_at": "2026-04-05T13:30:53.244862",
+      "success": true,
       "outputs": {
-        "success": false,
-        "error": "Unknown format code 'f' for object of type 'str'"
+        "success": true,
+        "return_code": 0,
+        "elapsed_time": 5174.464672088623,
+        "log_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude.log",
+        "transcript_file": "/workspaces/topo-drift-llm-embeds-5b03/logs/execution_claude_transcript.jsonl"
       }
     }
   },
   "current_stage": null,
-  "completed": false
+  "completed": true,
+  "completed_at": "2026-04-05T13:30:53.245692"
 }

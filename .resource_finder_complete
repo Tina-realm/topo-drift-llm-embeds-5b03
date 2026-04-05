@@ -1,5 +1,14 @@
 Resource finding phase completed successfully.
-Timestamp: 2026-04-05T07:15:00+00:00
-Papers downloaded: 18
+Timestamp: 2026-04-05T12:30:00+00:00
+Papers downloaded: 21
+  - 18 core papers (TDA, drift detection, baselines, tools)
+  - 3 user-specified papers (deep-read, all chunks):
+      * 2205.13147 — Matryoshka Representation Learning (NeurIPS 2022, 35 pages, 12 chunks)
+      * 2105.03468 — zeus Ensemble Slice Sampling (MNRAS 2021, 15 pages, 5 chunks)
+      * 2007.01882 — Quantum Fluctuations and Landauer Limit (PRL 2020, 18 pages, 6 chunks)
 Datasets downloaded: 3 (AG News 120K+7.6K, 20 Newsgroups 11.3K+7.5K, DBpedia14 560K+70K)
 Repositories cloned: 8
+Documentation updated:
+  - papers/README.md (papers 19-21 added with full metadata)
+  - resources.md (total updated to 21 papers)
+  - literature_review.md (section 2.5 added with deep notes on all 3 user-specified papers)

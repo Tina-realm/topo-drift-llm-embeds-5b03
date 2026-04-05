@@ -204,6 +204,101 @@ Key research dimensions:
 
 ---
 
+### 2.5 User-Specified Papers (Mandatory Deep Read)
+
+The following three papers were specified by the user and read in full (all chunks). They cover topics adjacent to the core research area.
+
+---
+
+#### Paper 15: Matryoshka Representation Learning (MRL)
+- **Authors**: Aditya Kusupati, Gantavya Bhatt, Aniket Rege, Matthew Wallingford, Aditya Sinha, Vivek Ramanujan, William Howard-Snyder, Kaifeng Chen, Sham Kakade, Prateek Jain, Ali Farhadi
+- **Affiliation**: University of Washington, Google Research, Harvard University
+- **Year**: 2022 (NeurIPS 2022)
+- **Source**: arXiv:2205.13147
+- **GitHub**: https://github.com/RAIVNLab/MRL
+- **Key Contribution**: MRL trains a single embedding model to simultaneously produce representations useful at O(log d) nested granularities. The first m dimensions of an MRL embedding are independently meaningful for any m in the nesting set M = {8, 16, 32, 64, 128, 256, 512, 1024, 2048} (for d=2048).
+- **Core Mechanism**:
+  - Multi-granularity training: the classification loss is summed over each nesting dimension with weighting factors c_m
+  - At inference, truncate to any m ∈ M to get an m-dimensional embedding with near-optimal quality for that dimension
+  - MRL-E (efficient variant): share weights across all dimension-specific classifiers to reduce parameter count
+  - Adaptive retrieval: use a cascade — coarse retrieval with small m, then re-rank shortlist with full d — achieving ~37 expected dimensions for 76.3% ImageNet-1K accuracy
+- **Results**:
+  - 14x smaller embedding (128 vs 2048 dims) with same classification accuracy on ImageNet-1K
+  - 14x real-world speedup on approximate nearest-neighbor retrieval (HNSW)
+  - Zero-shot transfer: MRL embeddings maintain transfer learning performance across scales
+  - Results hold across ResNet50, ViT-B/16, ALIGN (vision-language), BERT (NLP)
+- **PyTorch Implementation** (from appendix):
+  - `class Matryoshka_CE_Loss(nn.Module)`: wraps cross-entropy summed over nesting dimensions
+  - `class MRL_Linear_Layer(nn.Module)`: single linear layer serving all nesting dims simultaneously
+- **Relevance to Research**:
+  - MRL embeddings are ideal for multi-resolution TDA drift detection: compute persistent entropy at dimension {32, 64, 128, 256} from the same embedding vector
+  - Coarse-to-fine drift detection: use small m for fast pre-screening, then larger m for confirmation — analogous to MRL adaptive retrieval
+  - Practical: most modern sentence transformers (e.g., nomic-embed-text-v1.5) already use MRL; our drift detector can leverage this for free
+  - Key insight: topology at coarse granularity (m=32) may capture high-level semantic drift; topology at fine granularity (m=512) captures subtle structural drift
+
+---
+
+#### Paper 16: zeus — Ensemble Slice Sampling for Efficient Bayesian Parameter Inference
+- **Authors**: Minas Karamanis, Florian Beutler, John A. Peacock
+- **Affiliation**: University of Edinburgh
+- **Year**: 2021 (Monthly Notices of the Royal Astronomical Society)
+- **Source**: arXiv:2105.03468
+- **GitHub**: https://github.com/minaskar/zeus
+- **Key Contribution**: zeus implements Ensemble Slice Sampling (ESS), which combines the ensemble MCMC paradigm (multiple interacting walkers) with slice sampling (non-rejection sampling). This eliminates manual step-size tuning and handles complex posteriors efficiently.
+- **Core Mechanism**:
+  - Ensemble of N walkers (minimum N = 2D, recommended N = 2-4D where D = dimensionality)
+  - Slice sampling along directions determined by complementary ensemble (other walkers)
+  - Move strategies: Differential (project along ensemble directions), Gaussian, Global (mixture of all walkers), KDE (kernel density estimate), Random
+  - No accept/reject step → no tuning; automatically adapts to local geometry
+  - Convergence diagnostics: integrated autocorrelation time (IAT)
+- **Results**:
+  - 9x efficiency gain over emcee/AIES (Affine Invariant Ensemble Sampler) on cosmological parameter inference
+  - 29x efficiency gain on exoplanet radial velocity fitting (multimodal, non-linear correlations)
+  - Handles hard boundaries, heavy tails, and near-degenerate posteriors
+- **API**:
+  ```python
+  sampler = zeus.EnsembleSampler(nwalkers, ndim, log_prob_fn)
+  sampler.run_mcmc(start, nsteps)
+  chain = sampler.get_chain(flat=True)
+  ```
+- **Relevance to Research**:
+  - Marginally relevant: ESS could be used for Bayesian calibration of TDA detector hyperparameters (filtration radius, window size, entropy threshold) when the posterior landscape over hyperparameters is complex or multimodal
+  - More practically: the ensemble-based approach is analogous to the ensemble of sliding windows used in streaming drift detection — each window acts like a walker sampling the embedding distribution space
+  - Direct applicability is limited; the paper is primarily an astrophysics/statistics tool
+
+---
+
+#### Paper 17: Quantum Fluctuations Hinder Finite-time Information Erasure Near the Landauer Limit
+- **Authors**: Harry J. D. Miller, Giacomo Guarnieri, Mark T. Mitchison, John Goold
+- **Affiliation**: University of Manchester; Trinity College Dublin
+- **Year**: 2020 (Physical Review Letters 123, 230603)
+- **Source**: arXiv:2007.01882
+- **Key Contribution**: Rigorous proof that quantum coherence generates non-negative contributions to ALL statistical cumulants of the dissipated heat during bit erasure. The heat distribution in quantum protocols is fundamentally non-Gaussian with extreme outlier events that cannot occur classically.
+- **Core Result**: The cumulant generating function (CGF) decomposes as:
+  - K_q(u) = K^d_q(u) + K^c_q(u)
+  - K^d_q(u): classical (diagonal) contribution — depends only on energy populations
+  - K^c_q(u): coherent (quantum) contribution — always ≥ 0 for all cumulants
+  - K^c_q(u) ≈ -ukBT ∫₀^1 dt Ṡ_{1-ukBT}(ρ̂_t || ρ̄̂_t) where S_α is the Rényi divergence
+- **Mathematical Framework**:
+  - Adiabatic Lindblad master equation under slow-driving (Born-Markov, secular, adiabatic approximations)
+  - Power operator Ḣ_t = Ḣ^d_t (diagonal, classical) + Ḣ^c_t (coherent, quantum)
+  - Proof of positive semidefiniteness of quantum CGF via Rényi divergence monotonicity and quantum detailed balance
+  - Appendix B: Full derivation of CGF decomposition using perturbation expansion in slow-driving parameter ε
+  - Appendix C: Proof that all cumulants of K^c_q(u) are monotonically non-decreasing (via dual Lindblad generator, trace functional M^(u)_t, and time-translational symmetry)
+  - Appendix D: Explicit solution for damped two-level system — Bloch vector dynamics, analytical CGF expressions for both classical and quantum parts
+  - Appendix E: Monte Carlo quantum-jump simulation with fourth-order Runge-Kutta for heat distribution in Fig. 3
+- **Physical Interpretation**:
+  - Quantum protocols (non-zero mixing angle θ_t) produce extreme heat dissipation outliers (up to ~30x Landauer limit) that are absent in classical protocols (θ_t = 0)
+  - Rare events include negative heat transfer q < 0, which is impossible classically
+  - Bulk of distribution converges to Gaussian near Landauer bound as protocol time τ → ∞
+  - Quantum coherence: thermodynamic cost is not just the mean (which equals Landauer limit at ε→0) but the entire distribution is broadened and skewed
+- **Relevance to Research**:
+  - Conceptually: The Landauer limit (kBT ln 2 per bit erased) provides a thermodynamic analogy for "forgetting" reference data in a streaming drift detector. A detector that never discards old data has zero information erasure cost but unbounded memory; one that resets a reference window incurs an information cost.
+  - Mathematically: Very limited direct applicability. The Lindblad formalism, quantum coherence, and thermodynamic fluctuation theory are unrelated to TDA or LLM embedding analysis.
+  - The CGF decomposition into classical + quantum parts has a formal analogy to separating smooth (centroid/covariance) drift from topological (geometric) drift — the "quantum coherent" component being the part conventional detectors miss — but this analogy is loose and not actionable.
+
+---
+
 ## 3. Common Methodologies
 
 | Approach | Papers | Notes |

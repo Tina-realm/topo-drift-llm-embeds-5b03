@@ -138,3 +138,62 @@ Research area: Topological Drift Detection for Continuous Monitoring of LLM Embe
 - **Year**: 2021
 - **arXiv**: 2107.05412
 - **Why relevant**: Fastest VR persistent homology computation; needed for H1 on larger windows.
+
+---
+
+## User-Specified Papers (Deep Read)
+
+The following three papers were specified by the user for mandatory deep reading. They were read in full (all chunks).
+
+### 19. Matryoshka Representation Learning (MRL)
+- **File**: `2205.13147_user_specified_paper1.pdf`
+- **Authors**: Aditya Kusupati, Gantavya Bhatt, Aniket Rege, Matthew Wallingford, Aditya Sinha, Vivek Ramanujan, William Howard-Snyder, Kaifeng Chen, Sham Kakade, Prateek Jain, Ali Farhadi (University of Washington, Google Research, Harvard University)
+- **Year**: 2022 (NeurIPS 2022)
+- **Venue**: NeurIPS 2022
+- **arXiv**: 2205.13147
+- **GitHub**: https://github.com/RAIVNLab/MRL
+- **Key Contribution**: Matryoshka Representation Learning (MRL) encodes information at O(log d) nested granularities simultaneously in a single embedding vector. This is achieved by training with a loss function that ensures the first m dimensions are independently useful for any m in a set of nesting dimensions M = {8, 16, 32, ..., d}.
+- **Technical Details**:
+  - Single embedding model produces representations useful at all scales simultaneously
+  - MRL loss: sum of classification losses at each nesting dimension
+  - MRL-E (efficient): weight-tying across dimension-specific classifiers
+  - Nesting dimensions tested: M = {8, 16, 32, 64, 128, 256, 512, 1024, 2048} for ResNet50 (d=2048)
+  - Adaptive retrieval cascade: achieves ~37 expected dimensions for 76.3% ImageNet-1K accuracy
+  - 14x smaller embedding with same retrieval accuracy; 14x real-world speedup (HNSW index)
+  - PyTorch `Matryoshka_CE_Loss` and `MRL_Linear_Layer` classes provided in appendix
+- **Evaluated On**: ResNet50, ViT-B/16, ALIGN, BERT across vision and NLP modalities
+- **Key Results**: 14x size reduction with no accuracy loss; adaptive classification with cascades nearly matches oracle optimal-dimension performance; zero-shot transfer maintained across embedding scales
+- **Relevance to Research**: MRL is directly relevant to embedding drift detection with nested embeddings. Multi-scale TDA features could be computed at each nesting dimension; drift detected earlier at coarse granularity and refined at finer dimensions. Adaptive retrieval analogy: use coarse-granularity TDA for fast pre-screening, then fine-granularity for confirmation.
+
+### 20. zeus: Ensemble Slice Sampling for Bayesian Parameter Inference
+- **File**: `2105.03468_user_specified_paper2.pdf`
+- **Authors**: Minas Karamanis, Florian Beutler, John A. Peacock (University of Edinburgh)
+- **Year**: 2021 (Monthly Notices of the Royal Astronomical Society)
+- **Venue**: MNRAS 2021
+- **arXiv**: 2105.03468
+- **GitHub**: https://github.com/minaskar/zeus
+- **Key Contribution**: zeus implements Ensemble Slice Sampling (ESS) — a non-rejection MCMC method that combines ensemble sampling with slice sampling. Achieves 9x and 29x efficiency gains over emcee/AIES in cosmological applications.
+- **Technical Details**:
+  - Ensemble of at least 2D walkers (recommended 2-4D where D = parameter dimensionality)
+  - Moves: Differential (global correlation), Gaussian, Global, KDE, Random
+  - Slice sampling: no accept/reject → no tuning of step size; automatically adapts to local geometry
+  - Handles: non-linear correlations, multimodal distributions, heavy tails, hard boundaries
+  - Python API: `zeus.EnsembleSampler(nwalkers, ndim, log_prob_fn)`
+- **Relevance to Research**: Marginally relevant — could be used for Bayesian calibration of TDA-based drift detector hyperparameters (threshold, window size, filtration parameters). ESS is useful when the posterior over detector hyperparameters is multimodal or has complex geometry. However, this paper is primarily an astrophysics/statistics tool and its direct relevance to LLM embedding drift detection is limited.
+
+### 21. Quantum Fluctuations and Information Erasure Near the Landauer Limit
+- **File**: `2007.01882_user_specified_paper3.pdf`
+- **Authors**: Harry J. D. Miller, Giacomo Guarnieri, Mark T. Mitchison, John Goold (University of Manchester, Trinity College Dublin)
+- **Year**: 2020 (Physical Review Letters)
+- **Venue**: PRL 2020
+- **arXiv**: 2007.01882
+- **Key Contribution**: Proves rigorously that quantum coherence in open quantum systems generates non-negative contributions to ALL cumulants of the dissipated heat distribution during information erasure near the Landauer limit. The cumulant generating function (CGF) decomposes as K_q(u) = K^d_q(u) + K^c_q(u), where K^c_q(u) ≥ 0 for all u and all cumulants.
+- **Technical Details**:
+  - Framework: adiabatic Lindblad master equation under slow-driving approximation
+  - Diagonal (classical) CGF: K^d_q(u) = -(u² - βu)∫ dt ∫₀^∞ dν cov_t(Ḣ^d_t(ν), Ḣ^d_t)
+  - Coherent (quantum) CGF: K^c_q(u) ≈ -ukBT ∫₀^1 dt Ṡ_{1-ukBT}(ρ̂_t || ρ̄̂_t(s))|_{s=t}
+  - Proof that all cumulants of K^c_q(u) are non-negative via quantum detailed balance and Rényi divergences
+  - Explicit simulation: damped two-level system with adiabatic Lindblad equation; Bloch vector dynamics; Monte Carlo quantum-jump trajectories
+  - Results: quantum protocols produce extreme heat dissipation outliers (~30x Landauer limit) absent in classical protocols; heat distributions are non-Gaussian; outliers include rare negative-heat events impossible classically
+- **Appendices**: B: CGF decomposition proof; C: proof of monotonic cumulant increase; D: two-level system analytical solution; E: Monte Carlo quantum-jump simulation details
+- **Relevance to Research**: Very marginally relevant — this paper is quantum thermodynamics/information theory. The Landauer limit concept (minimum work required for information erasure = kBT ln 2) has a conceptual analogy to the cost of "forgetting" past information in a streaming drift detector, but the mathematical machinery is entirely unrelated to TDA or LLM embeddings. Included per user specification; not directly applicable to the core research.

@@ -14,7 +14,7 @@ All resources are organized in:
 
 ## Papers
 
-**Total papers downloaded: 18**
+**Total papers downloaded: 21**
 
 | # | Title | Authors | Year | File | Category |
 |---|---|---|---|---|---|
@@ -36,6 +36,9 @@ All resources are organized in:
 | 16 | giotto-ph: A Python Library for High-Performance Computation of Persistent Homology | (giotto-ph) | 2021 | `2107.05412_giotto_ph_high_performance.pdf` | TDA Tool |
 | 17 | Concept Drift Adaptation in Text Stream Mining: Comprehensive Review | (Survey) | 2023 | `2312.02901_concept_drift_text_stream_review.pdf` | Survey |
 | 18 | Beyond Statistical Similarity: Semantic Drift | (Semantic Drift) | 2023 | `2309.16427_beyond_statistical_similarity_semantic_drift.pdf` | Drift Analysis |
+| 19 | Matryoshka Representation Learning (MRL) | Kusupati, Bhatt, Rege et al. (UW, Google, Harvard) | 2022 | `2205.13147_user_specified_paper1.pdf` | **Embedding Methods** |
+| 20 | zeus: A Python Implementation of Ensemble Slice Sampling for Bayesian Inference | Karamanis, Beutler, Peacock (U. Edinburgh) | 2021 | `2105.03468_user_specified_paper2.pdf` | MCMC / Statistics |
+| 21 | Quantum Fluctuations Hinder Finite-time Information Erasure Near the Landauer Limit | Miller, Guarnieri, Mitchison, Goold | 2020 | `2007.01882_user_specified_paper3.pdf` | Quantum Physics |
 
 See `papers/README.md` for detailed descriptions.
 

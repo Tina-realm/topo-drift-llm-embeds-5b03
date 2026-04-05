@@ -1,0 +1,17 @@
+{
+  "python_version": "3.12.8",
+  "numpy_version": "2.4.4",
+  "sklearn_version": "1.8.0",
+  "ripser_version": "0.6.14",
+  "persim_version": "0.3.8",
+  "sentence_transformers_version": "5.3.0",
+  "timestamp": "2026-04-05T13:17:33.716049",
+  "device": "cpu",
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "window_size": 200,
+  "subsample_for_tda": 80
+}
