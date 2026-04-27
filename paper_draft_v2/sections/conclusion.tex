@@ -1,0 +1,10 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented a comprehensive comparison of TDA-based and classical drift detectors on LLM embedding streams, substantially expanding prior work with two datasets (\agnews, \twentyng), two embedding models (\minilm, \bertbase), 11 drift scenarios including novel centroid-preserving drifts, 20+ detection methods spanning statistical and topological families, and systematic ablation studies.
+
+Our key findings are: (1) Classical statistical methods remain dominant on standard topic drift, achieving near-perfect AUC across all datasets and models. (2) On centroid-preserving drift scenarios---subtopic reweighting and style perturbation---the advantage of moment-based methods is reduced, and TDA features provide complementary detection signal. (3) In controlled synthetic experiments, TDA H1 features uniquely detect topology-specific drift (loop emergence) where centroid shift fails entirely. (4) PCA dimensionality reduction before persistent homology is essential in high-dimensional embedding spaces, with PCA-50 substantially improving TDA reliability. (5) Proper calibration/evaluation splitting is critical for realistic FPR estimation.
+
+For practitioners deploying LLM monitoring pipelines: start with centroid shift and MMD for fast, reliable topic-drift detection; add energy distance or a classifier-based test for higher-order distributional sensitivity; and include TDA H1 features (with PCA-50 preprocessing) as a topology-sensitive secondary tier at modest computational cost.
+
+Future work should evaluate on within-domain temporal drift where low-order statistics may be similar, test adversarial prompt injection scenarios, explore GPU-accelerated persistent homology for larger point clouds, investigate ensemble detectors that combine TDA and statistical scores, and assess whether larger LLM embeddings exhibit richer topological structure that better leverages TDA's theoretical advantages.

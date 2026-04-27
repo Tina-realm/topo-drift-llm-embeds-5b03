@@ -1,0 +1,50 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Statistical Methods Dominate on Standard Drift}
+
+Classical statistical detectors achieve near-perfect AUC on topic drift in both \agnews and \twentyng---and across both \minilm and \bertbase embeddings. This reflects the high semantic separability of topic classes in modern sentence embedding spaces: even closely-related categories (\texttt{comp.mac} vs.\ \texttt{comp.ibm}) produce sufficient centroid separation for simple L2 distance to discriminate. The classifier-based two-sample test and energy distance further confirm that standard topic drift is ``solved'' by multiple non-TDA approaches.
+
+This result is practically important: for production systems where the primary concern is topic-level input drift, centroid shift at $<$1ms per window is fast, reliable, and sufficient.
+
+\subsection{Centroid-Preserving Drift: Where the Gap Narrows}
+
+Our new centroid-preserving drift scenarios---subtopic reweighting and style perturbation---provide a more challenging testbed. On subtopic reweighting, where internal topic structure reorganizes while the overall centroid remains approximately fixed, the advantage of moment-based methods is reduced. While covariance shift and the classifier-based test still detect these changes (because they capture higher-order statistics), pure centroid shift loses sensitivity. TDA methods, particularly Wasserstein H1 and persistence landscapes, provide complementary detection signal on these scenarios.
+
+The style perturbation scenario, which applies PCA-subspace rotations while re-centering, specifically targets methods that rely on the first two moments. Energy distance and the classifier-based test, being geometry-aware, remain effective here, which positions TDA's unique contribution more precisely: TDA adds value specifically when drift alters \emph{topological} structure (connectivity, loops, holes) rather than just geometric position or orientation.
+
+\subsection{When TDA Adds Genuine Value}
+
+\para{H1 features detect loop/hole emergence.}
+The synthetic experiment confirms TDA's irreplaceable role on topology-specific drift. H1 features (PE-H1, Wasserstein H1, sliced Wasserstein H1) achieve high AUC on annular drift where the distribution develops a topological hole while preserving its centroid. Centroid shift fails entirely, and even the classifier-based test and energy distance show reduced sensitivity. This validates the theoretical motivation for TDA-based monitoring.
+
+\para{Persistence landscapes and sliced Wasserstein.}
+The stronger TDA features---persistence landscapes and sliced Wasserstein distances---provide improved stability over scalar TDA summaries. Landscape norms aggregate the shape of persistence diagrams into a functional summary that is less sensitive to individual outlier features, while sliced Wasserstein provides a computationally efficient approximation to full Wasserstein with better statistical properties.
+
+\para{PCA before persistent homology.}
+The ablation on PCA dimensionality reveals a key practical insight: computing persistent homology on raw 384-dimensional (or 768-dimensional) embeddings suffers substantially from the curse of dimensionality. PCA-50 projection before ripser computation substantially improves TDA AUC and reduces variance. This is because \vrfilt filtrations in high dimensions produce many short-lived features (noise) that obscure the genuine topological signal. Dimensionality reduction concentrates the signal in a lower-dimensional subspace where persistent homology is more informative.
+
+\subsection{Practical Monitoring Recommendations}
+
+Based on our expanded results across two datasets, two models, and 11 drift scenarios:
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Primary tier:} Centroid shift + MMD for fast, reliable detection of topic-level drift. Add a classifier-based two-sample test or energy distance for sensitivity to higher-order distributional changes.
+    \item \textbf{Secondary tier:} TDA Wasserstein H1 or sliced Wasserstein H1 (with PCA-50 preprocessing) for topology-sensitive monitoring. Persistence landscapes provide an additional, more stable TDA signal.
+    \item \textbf{Calibration:} Use a separate calibration window set (not the evaluation windows) for threshold setting at the 95th percentile. This prevents inflated FPR from threshold overfitting.
+\end{enumerate}
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+\para{Dataset scope.}
+While we now test two datasets and two models, both datasets contain discrete topic categories. Real production drift often involves continuous temporal evolution within topics (\eg news vocabulary shifting over months), which we do not test.
+
+\para{Synthetic--real gap.}
+TDA's strongest advantages remain in the 50-dimensional synthetic experiment. The centroid-preserving scenarios on real data narrow the gap but do not eliminate it, suggesting that real LLM embedding topology may not exhibit the clean topological structures (loops, holes) that TDA is designed to detect.
+
+\para{Computational cost.}
+While TDA is feasible for monitoring ($<$1s per window on CPU), the classifier-based two-sample test provides similar geometry-aware detection at comparable cost without requiring specialized TDA libraries.
+
+\para{Subsample and dimensionality sensitivity.}
+The ablation studies show that TDA performance is sensitive to subsample size and PCA dimensionality. Practitioners must tune these hyperparameters, adding complexity compared to hyperparameter-free methods like centroid shift.

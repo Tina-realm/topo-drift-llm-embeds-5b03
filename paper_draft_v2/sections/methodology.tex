@@ -1,0 +1,112 @@
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Data Construction}
+\label{sec:data}
+
+We use two text classification datasets to evaluate drift detection across different difficulty levels.
+
+\para{\agnews~\cite{zhang2015character}.}
+Four well-separated topic classes: World, Sports, Business, Sci/Tech. We encode 3{,}000 samples per class, producing four distinct clusters in embedding space. This dataset represents ``easy'' drift where topic changes are clearly reflected in embedding centroids.
+
+\para{\twentyng~\cite{lang1995newsweeder}.}
+We select six categories forming three closely-related pairs: \texttt{comp.sys.mac.hardware}/\texttt{comp.sys.ibm.pc.hardware}, \texttt{rec.sport.baseball}/\texttt{rec.sport.hockey}, and \texttt{sci.med}/\texttt{sci.space}. Each pair shares substantial vocabulary overlap, making drift between them harder to detect---stressing all methods more meaningfully than \agnews.
+
+\para{Embedding models.}
+We use two sentence-transformer models to evaluate whether findings generalize across embedding dimensionalities:
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \minilm (\texttt{all-MiniLM-L6-v2}, 384 dimensions, L2-normalized)
+    \item \bertbase (\texttt{bert-base-nli-mean-tokens}, 768 dimensions, L2-normalized)
+\end{itemize}
+
+\subsection{Drift Scenarios}
+\label{sec:scenarios}
+
+We construct streaming windows of 200 samples each (default). The first 10 windows serve as a reference pool. Half of the reference windows (5) are used for threshold \emph{calibration} (setting the 95th percentile threshold), and the remaining 5 reference windows plus 10 drift windows are used for \emph{evaluation}. This split prevents the inflated FPR that results from evaluating against the same data used for threshold setting. We design 11 drift scenarios spanning four difficulty levels:
+
+\para{Standard drift (easily detectable by all methods).}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{No drift} (control): All windows from the same class.
+    \item \textbf{Abrupt topic drift}: Reference from World; test windows switch entirely to Sports.
+    \item \textbf{Gradual topic drift}: Reference from World; test windows contain linearly increasing Sports contamination.
+    \item \textbf{Newsgroup distant}: Close-domain (\texttt{comp.mac}$\to$\texttt{sci.space}).
+\end{itemize}
+
+\para{Moderate drift (challenges some methods).}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Style shift}: World$\to$Business (subtler same-genre shift).
+    \item \textbf{Newsgroup close}: Very similar domains (\texttt{comp.mac}$\to$\texttt{comp.ibm}).
+    \item \textbf{Subtle gradual}: 5\% contamination per window (very slow drift).
+\end{itemize}
+
+\para{Centroid-preserving drift (designed to challenge low-order statistics).}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Bimodal centroid-preserving}: Mix of two topic classes, re-centered to match the reference centroid, creating bimodal topology without centroid shift.
+    \item \textbf{Subtopic reweighting}: Within Sports, we identify 3 subtopics via $k$-means clustering and shift from uniform (33\%/33\%/33\%) to skewed (80\%/10\%/10\%) proportions. The overall ``Sports'' centroid shifts minimally while the internal topic structure reorganizes.
+    \item \textbf{Style perturbation}: Apply a composition of Givens rotations in the first 20 PCA dimensions while re-centering to match the reference centroid, preserving first and approximate second moments while altering subspace geometry.
+\end{itemize}
+
+\para{Geometric drift.}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Rotation drift}: Random orthogonal rotation in first 10 PCA dimensions. Preserves centroid (approximately) but alters covariance structure.
+\end{itemize}
+
+\subsection{Drift Detectors}
+\label{sec:detectors}
+
+We evaluate 20+ drift detectors spanning three families.
+
+\para{Statistical baselines (6 methods).}
+\textbf{Centroid shift}: $d = \|\bar{\vx}_{\text{ref}} - \bar{\vx}_{\text{test}}\|_2$.
+\textbf{Covariance shift}: PCA to 50 dimensions, then Frobenius norm of covariance difference.
+\textbf{MMD (RBF)}: Maximum Mean Discrepancy with Gaussian kernel (median heuristic bandwidth).
+\textbf{kNN distance}: Change in mean $k$-nearest-neighbor distance ($k{=}5$).
+\textbf{Energy distance}: $2\E[\|X{-}Y\|] - \E[\|X{-}X'\|] - \E[\|Y{-}Y'\|]$, a geometry-aware two-sample statistic that captures differences beyond moments.
+\textbf{Classifier two-sample test}: Train logistic regression on PCA-30 features to discriminate reference vs.\ test windows; the test accuracy minus chance (0.5) serves as the drift score.
+
+\para{TDA scalar features (10 methods).}
+All TDA methods subsample 150 points per window and optionally apply PCA (default: 50 dimensions) before computing persistent homology via the \vrfilt filtration using \texttt{ripser}~\cite{tralie2019ripser}. Drift score is the absolute difference between reference and test window features.
+
+\textbf{Persistent entropy} (\peh{0}, \peh{1}): Shannon entropy of persistence lifetimes (Eq.~\ref{eq:pe}).
+\begin{equation}
+    \text{PE}(\text{dgm}) = -\sum_{i} \frac{\ell_i}{L} \log \frac{\ell_i}{L}, \quad \ell_i = d_i - b_i, \quad L = \sum_i \ell_i
+    \label{eq:pe}
+\end{equation}
+
+\textbf{Wasserstein distance} (\wassh{0}, \wassh{1}): Wasserstein-1 distance between persistence diagrams.
+\textbf{Bottleneck distance} (H0): $\ell^\infty$ matching distance.
+\textbf{PHD}: Persistent Homology Dimension via MST log-log slope~\cite{wei2025shortphd}.
+\textbf{Total persistence} (H0, H1): Sum of all feature lifetimes.
+\textbf{Lifetime statistics}: Max and mean H0 lifetime, H1 feature count.
+
+\para{Stronger TDA features (4 methods).}
+\textbf{Persistence landscapes} (\landscape{0}, \landscape{1}): L2 norms of the first landscape function~\cite{bubenik2015statistical}, computed at resolution 100, capturing the shape of the persistence diagram as a functional summary. Drift score is the absolute difference of landscape norms.
+\textbf{Sliced Wasserstein distance} (\slwass{0}, \slwass{1}): Projects persistence diagrams onto 50 random directions and averages the 1D Wasserstein distances, providing a computationally efficient approximation to the full Wasserstein distance with better scaling properties.
+
+\subsection{Evaluation Protocol}
+\label{sec:eval}
+
+\para{Calibration/evaluation split.}
+We calibrate thresholds using the 95th percentile of drift scores on the first 5 reference windows (calibration set), targeting approximately 5\% FPR. We then evaluate on the remaining 5 reference windows plus 10 drift windows (evaluation set). This prevents the threshold from ``seeing'' evaluation data, producing more realistic FPR estimates.
+
+\para{Metrics.}
+(1) AUC-ROC for discriminating drift from no-drift windows; (2) detection delay (windows before first alarm on evaluation set); (3) realized FPR on evaluation reference windows; (4) end-to-end runtime per window, including PH diagram computation for TDA methods.
+
+\para{Reproducibility.}
+All experiments use 5 random seeds (42, 123, 456, 789, 1011). Results report mean $\pm$ std across seeds.
+
+\subsection{Ablation Studies}
+\label{sec:ablations}
+
+We systematically vary three key hyperparameters on \agnews with \minilm, using four drift scenarios (no drift, abrupt, centroid-preserving, subtopic reweighting):
+
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+    \item \textbf{Window size}: 50, 100, 200, 400 samples per window.
+    \item \textbf{TDA subsample}: 40, 80, 160 points subsampled before PH computation.
+    \item \textbf{PCA dimensionality}: 20, 50, 100 dimensions, or raw (no PCA) before PH.
+\end{itemize}
+
+\subsection{Synthetic Topology Experiment}
+\label{sec:synthetic}
+
+To isolate TDA's theoretical advantage, we design a controlled synthetic experiment in 50 dimensions with ground-truth topology. Unlike prior work using separability ratios (which are scale-dependent and sensitive to small denominators), we evaluate with proper AUC-ROC. We generate 20-window streams (10 reference + 10 drift) per seed and compute AUC for discriminating drift from no-drift windows. Drift types: (1) centroid shift (positive control); (2) annulus (H1 loop with same centroid); (3) two-cluster (H0 split with same centroid); (4) variance change.

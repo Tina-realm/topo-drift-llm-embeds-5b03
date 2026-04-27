@@ -1,0 +1,34 @@
+You are working on an existing research project. The user has provided feedback and directions below.
+
+
+═══════════════════════════════════════════════════════════════════════════════════════════════
+                              USER FEEDBACK / DIRECTIONS
+═══════════════════════════════════════════════════════════════════════════════════════════════
+
+[{&#39;priority&#39;: &#39;high&#39;, &#39;area&#39;: &#39;experiments&#39;, &#39;comment&#39;: &#39;Add at least one more dataset and embedding model beyond AG News + all-MiniLM-L6-v2.\nUse 20 Newsgroups (already downloaded in datasets/) with a second encoder (e.g., BERT-base\nor E5-small). AG News topics are too easily separable, making classical methods trivially\nperfect. A harder dataset will stress-test all methods more meaningfully.\n&#39;}, {&#39;priority&#39;: &#39;high&#39;, &#39;area&#39;: &#39;experiments&#39;, &#39;comment&#39;: &#39;Add harder, more realistic drift scenarios that preserve low-order statistics:\n(a) Within-topic subtopic reweighting (e.g., shift proportion of sports subtopics while\nkeeping the overall &#34;sports&#34; centroid roughly fixed).\n(b) Synonym/style perturbation drift that preserves centroid and covariance.\nThese centroid-preserving drifts on real data would bridge the gap between the current\ntrivial AG News drifts and the synthetic topology-only experiment.\n&#39;}, {&#39;priority&#39;: &#39;high&#39;, &#39;area&#39;: &#39;baselines&#39;, &#39;comment&#39;: &#34;Add energy distance and a classifier-based two-sample test (train a small MLP or\nlogistic regression to discriminate reference vs test windows) as additional non-TDA\nbaselines. These geometry-aware methods may also detect centroid-preserving changes,\nwhich would better position TDA&#39;s unique value. Also add persistence landscapes or\nsliced Wasserstein kernel on persistence diagrams as stronger TDA features.\n&#34;}, {&#39;priority&#39;: &#39;high&#39;, &#39;area&#39;: &#39;reporting&#39;, &#39;comment&#39;: &#39;Fix FPR inconsistency: the paper targets 5% FPR via 95th percentile threshold but\nTable 1 reports 0.10 FPR for all methods. Clarify the calibration/evaluation split\nand reconcile these numbers. Also fix Wasserstein runtime reporting: currently shows\n~2ms but this excludes persistence diagram computation. Report end-to-end per-window\ncost for each TDA method (diagram computation + feature/distance extraction).\n&#39;}, {&#39;priority&#39;: &#39;high&#39;, &#39;area&#39;: &#39;ablations&#39;, &#39;comment&#39;: &#39;Add ablation studies for key parameters:\n(a) Window size: test 50, 100, 200, 400 samples per window.\n(b) Subsample size for TDA: test 40, 80, 160 points.\n(c) PCA dimensionality reduction before persistent homology: test 20, 50, 100 dims\nvs raw 384 dims. Report AUC with confidence intervals (mean +/- std across seeds).\nThe current 80-point subsample on 384-d space likely suffers from curse of dimensionality.\n&#39;}, {&#39;priority&#39;: &#39;medium&#39;, &#39;area&#39;: &#39;statistics&#39;, &#39;comment&#39;: &#39;Replace separability ratio in the synthetic experiment with proper AUC or permutation-\nbased hypothesis tests. The separability ratio is scale-dependent and sensitive to\nsmall no-drift denominators. Report AUC, Type I/II error rates, or d-prime with\nconfidence intervals across seeds for the synthetic topology-only drift.\n&#39;}, {&#39;priority&#39;: &#39;medium&#39;, &#39;area&#39;: &#39;reporting&#39;, &#39;comment&#39;: &#39;Fix table/figure inconsistencies: reconcile AUC values for TDA methods across\nTable 1, Table 3, and Figures 1/3. Fix typos (HO vs H0, Wass-H1 vs Wass-H0).\nProvide unified per-scenario tables with mean +/- std across all seeds. Ensure\nmethod labels are consistent throughout the paper.\n&#39;}, {&#39;priority&#39;: &#39;medium&#39;, &#39;area&#39;: &#39;paper&#39;, &#39;comment&#39;: &#39;Regenerate the paper after experiments are updated. Ensure all new results\n(additional dataset, harder drifts, new baselines, ablations) are incorporated\ninto the results and discussion sections. Update the conclusion to reflect\nthe stronger evidence base.\n&#39;}]
+
+═══════════════════════════════════════════════════════════════════════════════════════════════
+                              WORKSPACE
+═══════════════════════════════════════════════════════════════════════════════════════════════
+
+Working Directory: /workspaces/topo-drift-llm-embeds-5b03
+Research Title: Topological Drift Detection for Continuous Monitoring of LLM Embedding StreamsDomain: machine_learning
+═══════════════════════════════════════════════════════════════════════════════════════════════
+                              INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════════════════════
+
+1. First, review the existing work to understand the current state:
+   - Read REPORT.md, README.md, or planning.md for context
+   - Check src/ for implementation, paper_draft/ for writing
+   - Look at results/ and figures/ for existing outputs
+
+2. Then address the user's feedback. The scope should match what they're asking for:
+   - Could be small fixes, could be major restructuring
+   - Could be new analysis, new writing, or new research directions
+   - Let the user's comments guide the scope of changes
+
+3. When done, update documentation to reflect what changed.
+
+If a virtual environment exists (.venv/), activate it. If you need new packages, use `uv add`.
+
+Start by exploring the workspace, then proceed with the user's directions.
